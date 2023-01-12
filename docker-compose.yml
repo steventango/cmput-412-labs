@@ -1,0 +1,10 @@
+services:
+  ubuntu:
+    build: .
+    environment:
+      - DISPLAY
+    command: /bin/bash
+    tty: true
+    privileged: true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
