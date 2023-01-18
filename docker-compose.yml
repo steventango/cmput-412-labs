@@ -1,10 +1,15 @@
 services:
-  ubuntu:
+  dts:
     build: .
+    command: /bin/bash
     environment:
       - DISPLAY
-    command: /bin/bash
+    env_file:
+      - .env
+    network_mode: "host"
     tty: true
     privileged: true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - /etc/hosts:/etc/hosts
+      - .:/home/steven/cmput-412-labs
