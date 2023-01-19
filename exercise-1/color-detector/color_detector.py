@@ -11,6 +11,8 @@ from jetson_nano_camera_node import JetsonNanoCameraNode
 
 N_SPLITS = os.environ.get("N_SPLITS", 1)
 
+# https://github.com/duckietown/dt-duckiebot-interface/blob/daffy/packages/
+# camera_driver/src/jetson_nano_camera_node.py
 class CapturableJetsonNanoCameraNode(JetsonNanoCameraNode):
     def capture(self):
         """Image capture procedure.
