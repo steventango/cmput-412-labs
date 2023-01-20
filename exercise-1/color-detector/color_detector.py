@@ -1,37 +1,26 @@
 #!/usr/bin/env python3
-import os
-import sys
 from time import sleep
-
+import os
 import cv2
 import numpy as np
 
-sys.path.append('/code/catkin_ws/src/dt-duckiebot-interface/packages/camera_driver/src/')
-from jetson_nano_camera_node import JetsonNanoCameraNode
+
+def gst_pipeline_string():
+    # Parameters from the camera_node
+    # Refer here : https://github.com/duckietown/dt-duckiebot-interface/blob/daffy/packages/camera_driver/config/jetson_nano_camera_node/duckiebot.yaml
+    gst_pipeline = f"nvarguscamerasrc ! nvjpegenc ! appsink"
+    print("Using GST pipeline: `{}`".format(gst_pipeline))
+    return gst_pipeline
 
 N_SPLITS = os.environ.get("N_SPLITS", 1)
 
-# https://github.com/duckietown/dt-duckiebot-interface/blob/daffy/packages/
-# camera_driver/src/jetson_nano_camera_node.py
-class CapturableJetsonNanoCameraNode(JetsonNanoCameraNode):
-    def capture(self):
-        """Image capture procedure.
-        Captures a frame from the /dev/video2 image sink and returns it
-        """
-        if self._device is None or not self._device.isOpened():
-            self.logerr("Device was found closed")
-            return
-        # get first frame
-        return self._device.read() if self._device else (False, None)
-
-
-camera_node = CapturableJetsonNanoCameraNode()
-camera_node.start()
+cap = cv2.VideoCapture()
+cap.open(gst_pipeline_string(), cv2.CAP_GSTREAMER)
 
 while(True):
     # Capture frame-by-frame
-    ret, frame = camera_node.capture()
-    print('a')
+    ret, frame = cap.read()
+    print(f"{ret}: {frame is not None}")
     if ret:
         print('b')
         width = frame.shape[1]
