@@ -17,7 +17,7 @@ class MyPublisherNode(DTROS):
         # publish message every 1 second
         rate = rospy.Rate(1) # 1Hz
         while not rospy.is_shutdown():
-            message = f"Hello world!"
+            message = f"Hello from {os.environ.get('VEHICLE_NAME')}"
             rospy.loginfo("Publishing message: '%s'" % message)
             self.pub.publish(message)
             rate.sleep()
