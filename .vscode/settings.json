@@ -6,5 +6,6 @@
   "python.analysis.extraPaths": [
     "/opt/ros/noetic/lib/python3/dist-packages",
     "/home/steven/Github/dt-ros-commons/packages/duckietown/include"
-  ]
+  ],
+  "terminal.integrated.cwd": "exercise-2/my-ros-program",
 }
