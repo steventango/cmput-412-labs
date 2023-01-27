@@ -26,6 +26,6 @@ class MyImageNode(DTROS):
 
 if __name__ == '__main__':
     # create the node
-    node = MyImageNode(node_name='my_subscriber_node')
+    node = MyImageNode(node_name='my_image_node')
     # keep spinning
     rospy.spin()
