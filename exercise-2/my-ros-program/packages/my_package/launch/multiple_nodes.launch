@@ -2,16 +2,20 @@
 
   <group ns="$(arg veh)">  
 
-    <remap from="my_publisher_node_1/pub" to="my_publisher_node_1/chatter"/>
-    <node pkg="my_package" type="my_publisher_node.py" name="my_publisher_node_1" output="screen"/>
-    <node pkg="my_package" type="my_publisher_node.py" name="my_publisher_node_2" output="screen"/>
+    <node pkg="my_package" type="my_image_node.py" name="my_image_node" output="screen"/>
 
-    <node pkg="my_package" type="my_subscriber_node.py" name="my_subscriber_node_1"  output="screen">
-      <remap from="~/chatter" to="my_publisher_node_1/chatter"/>
-    </node>
-    <node pkg="my_package" type="my_subscriber_node.py" name="my_subscriber_node_2"  output="screen">
-      <remap from="~/chatter" to="my_publisher_node_2/chatter"/>
-    </node>
-   </group>
+    <group ns="c2" if="false">
+      <node pkg="my_package" type="my_publisher_node.py" name="my_publisher_node_1" output="screen"/>
+      <node pkg="my_package" type="my_publisher_node.py" name="my_publisher_node_2" output="screen"/>
+
+      <node pkg="my_package" type="my_subscriber_node.py" name="my_subscriber_node_1"  output="screen">
+        <remap from="~/chatter" to="my_publisher_node_1/chatter"/>
+      </node>
+      <node pkg="my_package" type="my_subscriber_node.py" name="my_subscriber_node_2"  output="screen">
+        <remap from="~/chatter" to="my_publisher_node_2/chatter"/>
+      </node>
+    </group>
+
+  </group>
 
 </launch>
