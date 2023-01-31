@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
-import os
-
 import numpy as np
 import rosbag
 import rospy
 from duckietown.dtros import DTROS, NodeType
 from duckietown_msgs.msg import WheelEncoderStamped, WheelsCmdStamped
-from std_msgs.msg import Float32
+from std_msgs.msg import Float64
 
 
 class OdometryNode(DTROS):
@@ -40,7 +38,7 @@ class OdometryNode(DTROS):
                 ),
                 "pub_integrated_distance": rospy.Publisher(
                     f'~{wheel}_wheel_integrated_distance',
-                    Float32,
+                    Float64,
                     queue_size=10
                 ),
                 "distance": 0,
