@@ -2,9 +2,10 @@
 
   <group ns="$(arg veh)">  
 
-    <node pkg="my_package" type="my_image_node.py" name="my_image_node" output="screen"/>
+    <node pkg="my_package" type="odometry_node.py" name="odometry_node" output="screen"/>
 
     <group ns="c2" if="false">
+      <node pkg="my_package" type="my_image_node.py" name="my_image_node" output="screen"/>
       <node pkg="my_package" type="my_publisher_node.py" name="my_publisher_node_1" output="screen"/>
       <node pkg="my_package" type="my_publisher_node.py" name="my_publisher_node_2" output="screen"/>
 
