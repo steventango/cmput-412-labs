@@ -79,7 +79,7 @@ class OdometryNode(DTROS):
             self.wheels[wheel]["velocity"] = velocity
             self.wheels[wheel]["direction"] = 1 if velocity > 0 else -1
             print(f"{wheel:5} wheel direction: {self.wheels[wheel]['direction']}")
-        print(f"{wheel:5} wheel distance: {self.wheels[wheel]['distance']} m")
+        print(f"{wheel:5} wheel distance: {self.wheels[wheel]['distance']:.2f} m")
 
 
 if __name__ == '__main__':
