@@ -1,47 +1,21 @@
-# Template: template-ros
+# my-ros-program
 
-This template provides a boilerplate repository
-for developing ROS-based software in Duckietown.
+This is a basic ROS program based on the `duckietown/template-ros` template.
 
-**NOTE:** If you want to develop software that does not use
-ROS, check out [this template](https://github.com/duckietown/template-basic).
+## Installation and Usage
 
-
-## How to use it
-
-### 1. Fork this repository
-
-Use the fork button in the top-right corner of the github page to fork this template repository.
+```bash
+docker -H csc22902.local build -t duckietown/my-ros-program:latest-arm64v8 .
+dts devel run -H csc22902.local -v /data:/data
+```
 
 
-### 2. Create a new repository
+## Packages
 
-Create a new repository on github.com while
-specifying the newly forked template repository as
-a template for your new repository.
+### my_package
 
-
-### 3. Define dependencies
-
-List the dependencies in the files `dependencies-apt.txt` and
-`dependencies-py3.txt` (apt packages and pip packages respectively).
-
-
-### 4. Place your code
-
-Place your code in the directory `/packages/` of
-your new repository.
-
-
-### 5. Setup launchers
-
-The directory `/launchers` can contain as many launchers (launching scripts)
-as you want. A default launcher called `default.sh` must always be present.
-
-If you create an executable script (i.e., a file with a valid shebang statement)
-a launcher will be created for it. For example, the script file 
-`/launchers/my-launcher.sh` will be available inside the Docker image as the binary
-`dt-launcher-my-launcher`.
-
-When launching a new container, you can simply provide `dt-launcher-my-launcher` as
-command.
+Nodes:
+* `my_publisher_node`: This node publishes a hello from `VEHCILE_NAME` message to the `~chatter` topic.
+* `my_subscriber_node`: This node subscribes to the `~chatter` topic and prints the received message.
+* `my_image_node`: This node subscribes to the `/{self.veh_name}/camera_node/image/compressed` topic and publishes the received image to the `~image/compressed` topic.
+* `odometry_node`: This node subscribes to the `/{self.veh_name}/{wheel}_wheel_encoder_node/tick` and the `/{self.veh_name}/wheels_driver_node/wheels_cmd_executed` topic and publishes the integrated wheel distances to the `~{wheel}_wheel_integrated_distance` topics.
