@@ -19,12 +19,12 @@ Replace `csc22902` with the hostname of your Duckiebot.
 ### led_controls
 
 Nodes:
-* `led_controls_node`: This node contains the `led_control_service` service which can be called to switch the LED colors. It implements this by publishing to the `/{self.veh_name}/led_emitter_node/led_pattern` topic.
+* `led_controls_node`: This node contains the `led_control_service` service which can be called to switch the LED colors. It implements this by publishing to the `/{hostname}/led_emitter_node/led_pattern` topic.
 
 ### odometry_node
 
 Nodes:
-* `odometry_driver_node`: This node implements the odometry based driver control node. It subscribes to the `/{self.veh_name}/left_wheel_integrated_distance`, `/{self.veh_name}/right_wheel_integrated_distance`, and `world_kinematics`. It makes requests
+* `odometry_driver_node`: This node implements the odometry based driver control node. It subscribes to the `/{hostname}/left_wheel_integrated_distance`, `/{hostname}/right_wheel_integrated_distance`, and `world_kinematics`. It makes requests
 to the `led_control_service` service to switch the LED colors.
-It uses a variety of hard coded methods to drive the Duckiebot in a square and then a circle. It publishes to the `/{self.hostname}/wheels_driver_node/wheels_cmd` topic to control the robot.
+It uses a variety of hard coded methods to drive the Duckiebot in a square and then a circle. It publishes to the `/{hostname}/wheels_driver_node/wheels_cmd` topic to control the robot.
 * `odometry_publisher_node`: This node implements the forward kinematics of the Duckiebot. It subscribes to the `/{hostname}/right_wheel_encoder_node/tick`, `/{hostname}/left_wheel_encoder_node/tick`, and `/{hostname}/wheels_driver_node/wheels_cmd_executed` topics. It publishes to the `/{hostname}/right_wheel_integrated_distance`, `/{hostname}/left_wheel_integrated_distance`, and `/{hostname}/world_kinematics` topics.
