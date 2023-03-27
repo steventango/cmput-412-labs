@@ -9,5 +9,7 @@
     "/home/steven/Github/dt-ros-commons/packages/duckietown/include",
     "/home/steven/Github/code/catkin_ws/devel/lib/python3/dist-packages"
   ],
-  "terminal.integrated.cwd": "exercise-2/my-ros-program",
+  "terminal.integrated.cwd": "lab5/mallardvision",
+  "python.formatting.provider": "black",
+  "ros.distro": "noetic",
 }

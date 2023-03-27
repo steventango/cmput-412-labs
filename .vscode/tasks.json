@@ -1,0 +1,87 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Local Build",
+      "type": "shell",
+      "command": "docker build -t duckietown/mallardvision:latest-arm64v8 .",
+      "options": {
+        "cwd": "${workspaceFolder}/lab5/mallardvision",
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Local Test",
+      "type": "shell",
+      "command": "dts devel run",
+      "options": {
+        "cwd": "${workspaceFolder}/lab5/mallardvision"
+      },
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "dependsOn": [
+        "Local Build"
+      ]
+    },
+    {
+      "label": "Remote Build",
+      "type": "shell",
+      "command": "docker -H ${input:bot}.local build -t duckietown/mallardvision:latest-arm64v8 .",
+      "options": {
+        "cwd": "${workspaceFolder}/lab5/mallardvision"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Remote Test",
+      "type": "shell",
+      "command": "docker run -h ${input:bot}.local -v /data:/data",
+      "options": {
+        "cwd": "${workspaceFolder}/lab5/mallardvision"
+      },
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "dependsOn": [
+        "Remote Build"
+      ]
+    }
+  ],
+  "inputs": [{
+    "type": "pickString",
+    "id": "bot",
+    "description": "Bot hostname",
+    "options": [
+      "csc22902",
+      "csc22927",
+    ],
+    "default": "csc22927"
+  },]
+}
